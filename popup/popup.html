@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="header">
+    <img src="../icons/spy-duck-48.png" alt="Spy Duck Logo">
+    <h1>Spy Duck</h1>
+  </div>
+  
+  <div class="tabs">
+    <button id="tab-jobs" class="tab-button active">
+      <i class="fas fa-tasks"></i> Jobs
+    </button>
+    <button id="tab-filters" class="tab-button">
+      <i class="fas fa-filter"></i> Filters
+    </button>
+    <button id="tab-run" class="tab-button">
+      <i class="fas fa-play"></i> Run
+    </button>
+    <button id="tab-config" class="tab-button">
+      <i class="fas fa-cog"></i> Config
+    </button>
+  </div>
+  
+  <div class="tab-content">
+    <!-- Jobs Tab -->
+    <div id="content-jobs" class="content active">
+      <div class="search-container">
+        <input type="text" id="job-search" placeholder="Search jobs...">
+        <button id="add-job-btn" class="action-button">
+          <i class="fas fa-plus"></i> Add Job
+        </button>
+        <button id="eyedropper-btn" class="action-button">
+          <i class="fas fa-eye-dropper"></i> Select Element
+        </button>
+      </div>
+      
+      <div id="jobs-list" class="list-container">
+        <!-- Jobs will be displayed here -->
+        <div class="empty-message">No jobs defined. Use the eyedropper to add a new job.</div>
+      </div>
+      
+      <div id="job-details" class="details-container hidden">
+        <h3>Job Details</h3>
+        <form id="job-form">
+          <div class="form-group">
+            <label for="job-name">Name:</label>
+            <input type="text" id="job-name" required>
+          </div>
+          <div class="form-group">
+            <label for="job-url">URL:</label>
+            <input type="url" id="job-url" required>
+          </div>
+          <div class="form-group">
+            <label for="job-selector">CSS Selector:</label>
+            <input type="text" id="job-selector" required>
+          </div>
+          <div class="form-group checkbox">
+            <input type="checkbox" id="job-difference">
+            <label for="job-difference">Check for differences only</label>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="action-button">Save</button>
+            <button type="button" id="cancel-job-btn" class="action-button secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Filters Tab -->
+    <div id="content-filters" class="content">
+      <div class="search-container">
+        <input type="text" id="filter-search" placeholder="Search filters...">
+        <button id="add-filter-btn" class="action-button">
+          <i class="fas fa-plus"></i> Add Filter
+        </button>
+      </div>
+      
+      <div id="filters-list" class="list-container">
+        <!-- Filters will be displayed here -->
+        <div class="empty-message">No filters defined. Add a filter to process job results.</div>
+      </div>
+      
+      <div id="filter-details" class="details-container hidden">
+        <h3>Filter Details</h3>
+        <form id="filter-form">
+          <div class="form-group">
+            <label for="filter-name">Name:</label>
+            <input type="text" id="filter-name" required>
+          </div>
+			
+			<!-- filter-job select element -->
+			<div class="form-group">
+			  <label for="filter-job">Apply to Job:</label>
+			  <select id="filter-job" required>
+				<option value="all">All Jobs</option>
+				<option value="">Select a job...</option>
+				<!-- Jobs will be populated here -->
+			  </select>
+			</div>
+          
+		  <div class="form-group">
+            <label for="filter-include">Include Keywords (comma separated):</label>
+            <input type="text" id="filter-include" placeholder="keyword1, keyword2, ...">
+          </div>
+          <div class="form-group">
+            <label for="filter-exclude">Exclude Words (comma separated):</label>
+            <input type="text" id="filter-exclude" placeholder="word1, word2, ...">
+          </div>
+          <div class="button-group">
+            <button type="submit" class="action-button">Save</button>
+            <button type="button" id="cancel-filter-btn" class="action-button secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Run Tab -->
+    <div id="content-run" class="content">
+      <div class="info-box">
+        <p>Last run: <span id="last-run-time">Never</span></p>
+        <p>Results: <span id="result-count">0</span></p>
+      </div>
+      
+      <button id="run-now-btn" class="big-action-button">
+        <i class="fas fa-play"></i> Run All Jobs Now
+      </button>
+      
+      <div id="results-container" class="results-container">
+        <h3>Recent Results</h3>
+        <div id="results-list">
+          <!-- Results will be displayed here -->
+          <div class="empty-message">No results yet. Run jobs to see results here.</div>
+        </div>
+        
+        <button id="view-results-table-btn" class="action-button secondary">
+          <i class="fas fa-table"></i> View in Table
+        </button>
+      </div>
+    </div>
+    
+    <!-- Config Tab -->
+    <div id="content-config" class="content">
+      <form id="config-form">
+        <div class="form-group">
+          <label for="discord-webhook">Discord Webhook URL:</label>
+          <input type="url" id="discord-webhook" placeholder="https://discord.com/api/webhooks/...">
+        </div>
+        
+        <h3>Schedule Settings</h3>
+        <div class="form-group">
+          <label for="schedule-interval">Run every:</label>
+          <div class="input-with-unit">
+            <input type="number" id="schedule-interval" min="1" max="12" value="1">
+            <span>hours</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="schedule-start-time">Between:</label>
+          <div class="time-range">
+            <input type="time" id="schedule-start-time" value="08:00">
+            <span>and</span>
+            <input type="time" id="schedule-end-time" value="18:00">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>On days:</label>
+          <div class="day-checkboxes">
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-sun" value="0">
+              <label for="day-sun">Sun</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-mon" value="1" checked>
+              <label for="day-mon">Mon</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-tue" value="2" checked>
+              <label for="day-tue">Tue</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-wed" value="3" checked>
+              <label for="day-wed">Wed</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-thu" value="4" checked>
+              <label for="day-thu">Thu</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-fri" value="5" checked>
+              <label for="day-fri">Fri</label>
+            </div>
+            <div class="day-checkbox">
+              <input type="checkbox" id="day-sat" value="6">
+              <label for="day-sat">Sat</label>
+            </div>
+          </div>
+        </div>
+        
+        <h3>Notification Settings</h3>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="notify-sound" checked>
+          <label for="notify-sound">Play sound when complete</label>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="notify-badge" checked>
+          <label for="notify-badge">Show result count on icon</label>
+        </div>
+        
+        <div class="button-group">
+          <button type="submit" class="action-button">Save Configuration</button>
+          <button type="button" id="reset-btn" class="action-button danger">Reset All Data</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

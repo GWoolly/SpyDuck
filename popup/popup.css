@@ -1,0 +1,406 @@
+/* Spy Duck Popup Styles */
+/* Spy Duck Popup Styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 400px;
+  max-height: 600px;
+  overflow: hidden;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #FF5722;
+  color: white;
+}
+
+.header img {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  background-color: #e0e0e0;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid #FF5722;
+  color: #FF5722;
+  background-color: #fff;
+}
+
+.tab-button i {
+  margin-right: 5px;
+}
+
+/* Tab Content */
+.tab-content {
+  height: 480px;
+  overflow-y: auto;
+}
+
+.content {
+  display: none;
+  padding: 16px;
+}
+
+.content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Search and Action Buttons */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.action-button {
+  padding: 8px 12px;
+  background-color: #FF5722;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #E64A19;
+}
+
+.action-button.secondary {
+  background-color: #757575;
+}
+
+.action-button.secondary:hover {
+  background-color: #616161;
+}
+
+.action-button.danger {
+  background-color: #F44336;
+}
+
+.action-button.danger:hover {
+  background-color: #D32F2F;
+}
+
+.big-action-button {
+  width: 100%;
+  padding: 16px;
+  background-color: #FF5722;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.big-action-button:hover {
+  background-color: #E64A19;
+}
+
+/* Lists */
+.list-container {
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.list-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.list-item.active {
+  background-color: #FBE9E7;
+  border-left: 3px solid #FF5722;
+}
+
+.list-item .title {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.list-item .subtitle {
+  font-size: 12px;
+  color: #757575;
+}
+
+.list-item .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.list-item .actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #757575;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.list-item .actions button:hover {
+  color: #FF5722;
+}
+
+.list-item .actions button.delete:hover {
+  color: #F44336;
+}
+
+.empty-message {
+  padding: 16px;
+  text-align: center;
+  color: #757575;
+  font-style: italic;
+}
+
+/* Form Styles */
+.details-container {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.details-container.hidden {
+  display: none;
+}
+
+.details-container h3 {
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.form-group.checkbox input {
+  width: auto;
+  margin-right: 8px;
+}
+
+.form-group.checkbox label {
+  margin-bottom: 0;
+}
+
+.input-with-unit {
+  display: flex;
+  align-items: center;
+}
+
+.input-with-unit input {
+  width: 80px;
+  margin-right: 8px;
+}
+
+.time-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.day-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.day-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Results Styles */
+.info-box {
+  background-color: #E3F2FD;
+  border: 1px solid #BBDEFB;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.info-box p {
+  margin-bottom: 4px;
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.results-container {
+  margin-top: 16px;
+}
+
+.results-container h3 {
+  margin-bottom: 12px;
+}
+
+#results-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  background-color: white;
+}
+
+.result-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item .title {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.result-item .url {
+  font-size: 12px;
+  color: #1976D2;
+  margin-bottom: 8px;
+  word-break: break-all;
+}
+
+.result-item .content {
+  font-size: 13px;
+  line-height: 1.4;
+  max-height: 100px;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  padding: 8px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  margin-left: 5px;
+}
+
+.badge.difference {
+  background-color: #FFA000;
+}
+
+.badge.content {
+  background-color: #388E3C;
+}

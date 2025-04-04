@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "Spy Duck",
+  "version": "1.0.0",
+  "description": "Web scraper to monitor text changes and filter content",
+  "icons": {
+    "48": "icons/spy-duck-48.png",
+    "96": "icons/spy-duck-96.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "alarms",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/spy-duck-48.png"
+    },
+    "default_title": "Spy Duck",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "sounds/*"
+  ]
+}

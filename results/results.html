@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Spy Duck Results</title>
+  <link rel="stylesheet" href="results.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="header">
+    <img src="../icons/spy-duck-48.png" alt="Spy Duck Logo">
+    <h1>Spy Duck Results</h1>
+  </div>
+  
+  <div class="container">
+    <div class="toolbar">
+      <div class="info">
+        <span>Last run: <span id="last-run-time">Never</span></span>
+        <span>Total results: <span id="result-count">0</span></span>
+      </div>
+      
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search results...">
+        <select id="filter-select">
+          <option value="all">All Results</option>
+          <option value="content">Content Only</option>
+          <option value="difference">Changes Only</option>
+        </select>
+      </div>
+      
+      <div class="actions">
+        <button id="run-filters-btn" class="action-button">
+          <i class="fas fa-filter"></i> Apply Filters
+        </button>
+        <button id="export-btn" class="action-button">
+          <i class="fas fa-file-export"></i> Export to CSV
+        </button>
+      </div>
+    </div>
+    
+    <div class="results-table-container">
+      <table id="results-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Type</th>
+            <th>Content</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="results-body">
+          <!-- Results will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+    
+    <div id="empty-message" class="empty-message hidden">
+      No results found. Try changing your search or filter settings.
+    </div>
+    
+    <div id="content-viewer" class="content-viewer hidden">
+      <div class="content-header">
+        <h2 id="content-title">Content Viewer</h2>
+        <button id="close-viewer-btn" class="close-button">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="content-body" class="content-body"></div>
+    </div>
+  </div>
+  
+  <script src="results.js"></script>
+</body>
+</html>
