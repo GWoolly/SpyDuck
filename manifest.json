@@ -13,7 +13,9 @@
     "activeTab",
     "<all_urls>",
     "alarms",
-    "notifications"
+    "notifications",
+    "http://*/",
+    "https://*/*"
   ],
   "browser_action": {
     "default_icon": {
@@ -28,7 +30,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["jquery.min.js", "content.js"]
     }
   ],
   "web_accessible_resources": [
