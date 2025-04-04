@@ -2,6 +2,7 @@
 
 // Initialize storage with default values if not set
 browser.runtime.onInstalled.addListener(() => {
+  console.log("SpyDuck extension installed.");
   browser.storage.local.get(['jobs', 'filters', 'config'], result => {
     if (!result.jobs) {
       browser.storage.local.set({ jobs: [] });
@@ -147,27 +148,16 @@ function runAllJobs() {
         browser.runtime.onMessage.addListener(messageListener);
         
         // Add a loaded event listener to know when page is ready
-        browser.tabs.onUpdated.addListener(function onTabLoaded(tabId, changeInfo) {
-          if (tabId === tab.id && changeInfo.status === 'complete') {
-            console.log(`Tab ${tab.id} loaded completely`);
-            browser.tabs.onUpdated.removeListener(onTabLoaded);
-            
-            // Send job details to content script after page load
-            browser.tabs.executeScript(tab.id, {
-              code: `window.spyDuckJob = ${JSON.stringify(job)};`
-            }).then(() => {
-              return browser.tabs.executeScript(tab.id, {
-                file: 'content.js'
-              });
-            }).catch(err => {
-              console.error("Error injecting script:", err);
-              clearTimeout(timeoutId);
-              browser.tabs.remove(tab.id).then(() => {
-                processNextJob();
-              }).catch(e => {
-                console.error("Error closing tab:", e);
-                processNextJob();
-              });
+        chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+          if (changeInfo.status === 'complete' && tab.url.startsWith('http')) {
+            chrome.scripting.executeScript({
+              target: { tabId },
+              files: ['content.js']
+            }, () => {
+              if (chrome.runtime.lastError) {
+                console.error("Error injecting content script:",
+        chrome.runtime.lastError);
+              }
             });
           }
         });
